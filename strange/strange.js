@@ -1,6 +1,6 @@
-var delta  = 1,
+var delta  = 0.001,
     r = 0,
-    stop = 10000,
+    stop = 100000,
     canvas = document.getElementById('test'),
     ctx = canvas.getContext('2d'),
     sin = Math.sin,
@@ -39,16 +39,18 @@ var delta  = 1,
 
             setTimeout(function() {
 
-                ctx.fillStyle = 'rgba(' + getFillStyle(getTime()) + ')';
-                //ctx.fillStyle = 'rgba(255,255,255,0.5)';
-                // console.log('getFillStyle', getFillStyle(getTime()));
+                a = -0.966918 - 0.3 + 0.5 * sin(r + 1.0);
+                b = 2.879879 + 1.1 + 0.8 * sin(r * 2.0 + 3.0);
+                c = 0.765145 - 0.3 + 0.2 * sin(r * 3.0 + 5.0);
+                d = 0.744728 - 0.3 + 0.4 * sin(r * 1.4 + 7.0);
 
-                for(var i = 0; i < 256; i++) {
+                ctx.fillStyle = 'rgba(' + getFillStyle(getTime()) + ')';
+
+                for(var i = 0; i < 4 * 1024; i++) {
 
                     // x, y: -1, -1, 1, 1
                     // left: (-1 + shift) * k
                     // right: (1 + shift) * k
-                    // 
                     xnew = sin(y * b) + c * sin(x * b);
                     ynew = sin(x * a) + d * sin(y * a);
 
@@ -59,9 +61,7 @@ var delta  = 1,
 
                 }
 
-                // console.log('x: ', (x + shiftX) * k, 'y:', (y + shiftY  ) * k);
-
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 r += delta;
