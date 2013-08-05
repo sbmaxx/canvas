@@ -42,15 +42,12 @@ var delta  = 0.001,
                 d = 0.744728 - 0.3 + 0.4 * sin(r * 1.4 + 7.0);
 
                 ctx.fillStyle = 'rgba(' + getFillStyle(getTime()) + ')';
-                //ctx.fillStyle = 'rgba(255,255,255,0.5)';
-                // console.log('getFillStyle', getFillStyle(getTime()));
 
-                for(var i = 0; i < 256; i++) {
+                for(var i = 0; i < 1024; i++) {
 
                     // x, y: -1, -1, 1, 1
                     // left: (-1 + shift) * k
                     // right: (1 + shift) * k
-                    // 
                     xnew = sin(y * b) + c * sin(x * b);
                     ynew = sin(x * a) + d * sin(y * a);
 
@@ -61,7 +58,7 @@ var delta  = 0.001,
 
                 }
 
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.008)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 r += delta;
