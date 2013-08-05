@@ -1,37 +1,33 @@
-var delta  = 0.5,
-    start = 0,
+var delta  = 1,
+    r = 0,
     stop = 10000,
     canvas = document.getElementById('test'),
     ctx = canvas.getContext('2d'),
     sin = Math.sin,
     rnd = Math.random,
-    getRGBRnd = (function() {
-
-        var min = 0,
-            max = 255;
-
-        return function() {
-            return ~~(rnd() * (max - min + 1) + min); 
-        }
-
-    }()),
-    getFillStyle = function() {
+    getFillStyle = function(r) {
         return [
-            getRGBRnd(),
-            getRGBRnd(),
-            getRGBRnd(),
-            1
+            ~~(255 * (1 - 0.5 * sin(r * 5))),
+            ~~(255 * (1 - 0.5 * sin(r * 7))),
+            ~~(255 * (1 - 0.5 * sin(r * 11))),
+            0.3
         ].join(',');
     },
+    getTime = (function() {
+        var start = new Date();
+        return function() {
+            return ((new Date() - start) & 0xfffffff) / 20000;
+        }
+    }()),
     draw = (function() {
 
         var x = 1,
             y = 1,
             size = 1,
-            a = -0.966918,
-            b = 2.879879,
-            c = 0.765145,
-            d = 0.744728,
+            a = -0.966918 - 0.3 + 0.5 * sin(r + 1.0),
+            b = 2.879879 + 1.1 + 0.8 * sin(r * 2.0 + 3.0),
+            c = 0.765145 - 0.3 + 0.2 * sin(r * 3.0 + 5.0),
+            d = 0.744728 - 0.3 + 0.4 * sin(r * 1.4 + 7.0),
             xnew, ynew;
 
         var z = 4,
@@ -43,7 +39,9 @@ var delta  = 0.5,
 
             setTimeout(function() {
 
-                ctx.fillStyle = 'rgba(' + getFillStyle() + ')';
+                ctx.fillStyle = 'rgba(' + getFillStyle(getTime()) + ')';
+                //ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                // console.log('getFillStyle', getFillStyle(getTime()));
 
                 for(var i = 0; i < 256; i++) {
 
@@ -66,9 +64,9 @@ var delta  = 0.5,
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                start += delta;
+                r += delta;
 
-                if (start < stop) {
+                if (r < stop) {
                     draw();
                 }
 
