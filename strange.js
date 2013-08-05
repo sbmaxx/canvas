@@ -22,7 +22,7 @@ var delta  = 0.5,
             getRGBRnd(),
             1
         ].join(',');
-    },    
+    },
     draw = (function() {
 
         var x = 1,
@@ -33,8 +33,6 @@ var delta  = 0.5,
             c = 0.765145,
             d = 0.744728,
             xnew, ynew;
-
-        console.log('width: ', canvas.width, 'height: ', canvas.height);
 
         var z = 4,
             k = Math.min(canvas.width, canvas.height) / z,
