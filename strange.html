@@ -3,16 +3,26 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <script type="text/javascript">
-        var canvas = document.getElementById('test');
-        canvas.width = document.body.clientWidth;
-        canvas.height = document.body.clientHeight;
-    </script>
-    <script type="text/javascript" src="http://rawgithub.com/sbmaxx/canvas/master/strange.js">
     <title>Canvas by sbmaxx</title>
+    <style>
+        html, body {
+            background: #000;
+            overflow: hidden;
+            height: 100%;
+        }
+    </style>
   </head>
-
   <body>
     <canvas id="test"></canvas>
+    <script type="text/javascript">
+        onResize();
+        window.addEventListener('resize', onResize);
+        function onResize() {
+            var canvas = document.getElementById('test');
+            canvas.width = document.body.clientWidth;
+            canvas.height = document.body.clientHeight;
+        }
+    </script>
+    <script type="text/javascript" src="http://rawgithub.com/sbmaxx/canvas/master/strange.js"></script>
   </body>
 </html>
